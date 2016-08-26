@@ -1,0 +1,29 @@
+{
+    "apps": [
+
+        {
+            "name": "test app",
+            "script": "index.js",
+            "env": {
+                "COMMON_VARIABLE": "true"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+    }
+  ],
+    "deploy": {
+        "production": {
+            "key": "productpipeline.pem",
+            "user": "ubuntu",
+            "host": "54.204.198.231",
+            "ref": "origin/master",
+            "repo": "git@github.com:ankur-compro/test.git",
+            "path": "/home/ubuntu/pipeline",
+            "post-deploy": "npm install ; pm2 startOrGracefulReload ecosystem.json --env production",
+            "env": {
+                "ENVIRONMENT": "production"
+            }
+        }
+    }
+}
